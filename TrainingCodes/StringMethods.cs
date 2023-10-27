@@ -48,6 +48,12 @@ namespace UseString
             // remove
             Console.WriteLine(str1.Remove(0, 3));
 
+            // pad left
+            Console.WriteLine(str1.PadLeft(10, '-'));
+
+            // pad right 
+            Console.WriteLine(str1.PadRight(8, '-'));
+
             // string builder
             var sb = new StringBuilder("Hello");
             Console.WriteLine(sb);
