@@ -10,15 +10,25 @@ namespace Assignment1
     {
         private static bool IsMagical(int num)
         {
+            StringBuilder sb = new StringBuilder(str);
             int sum = 0;
-            while (num > 0)
+            bool endProcess = false;
+            while (!endProcess)
             {
-                sum += (num % 10);
-                num /= 10;
-                if (num == 0 && sum > 9)
+                for (int i = 0; i < sb.Length; i++)
                 {
-                    num = sum;
+                    int num = sb[i] - '0';
+                    sum += num;
+                }
+                if (sum >= 10)
+                {
+                    sb.Clear();
+                    sb.Append(sum.ToString());
                     sum = 0;
+                }
+                else
+                {
+                    endProcess = true;
                 }
             }
             return sum == 1;
@@ -27,21 +37,14 @@ namespace Assignment1
         {
             Console.Write("Enter a string : ");
             string str = Console.ReadLine();
-            int num;
-            if (int.TryParse(str, out num))
+
+            if (IsMagical(str))
             {
-                if (IsMagical(num))
-                {
-                    Console.WriteLine("Yes, the input string is magical");
-                }
-                else
-                {
-                    Console.WriteLine("Input string is not magical");
-                }
+                Console.WriteLine("Yes, the input string is magical");
             }
             else
             {
-                Console.WriteLine("Invalid input");
+                Console.WriteLine("Input string is not magical");
             }
 
             Console.ReadKey();
