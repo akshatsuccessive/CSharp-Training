@@ -8,7 +8,7 @@ namespace Assignment1
 {
     class MagicalString
     {
-        private static bool IsMagical(int num)
+        private static bool IsMagical(string str)
         {
             StringBuilder sb = new StringBuilder(str);
             int sum = 0;

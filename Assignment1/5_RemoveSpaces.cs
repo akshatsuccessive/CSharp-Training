@@ -10,7 +10,7 @@ namespace Assignment1
     {
         private static string PrintString(string str)
         {
-            string ans = "";
+            StringBuilder ans = new StringBuilder();
             for (int i = 0; i < str.Length; i++)
             {
                 if (str[i] == ' ' && str[i + 1] == ' ')
@@ -22,7 +22,7 @@ namespace Assignment1
                     ans += str[i];
                 }
             }
-            return ans;
+            Console.WriteLine(ans);
         }
         public static void RemoveMultipleSpaces()
         {
@@ -32,8 +32,9 @@ namespace Assignment1
 
             str = str.Trim();
 
-            string ans = PrintString(str);
-            Console.WriteLine(ans);
+            Console.Write("\n");
+
+            PrintStringWithoutMultipleSpaces(str);
 
             Console.ReadKey();
         }
