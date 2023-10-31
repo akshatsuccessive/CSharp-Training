@@ -10,6 +10,8 @@ namespace Assignment2
     {
         private static int CountMinSwitches(int[] bulb, int size)
         {
+            // O(n2) Solution
+            /*
             int count = 0;
             for(int i = 0; i < size; i++)
             {
@@ -28,6 +30,23 @@ namespace Assignment2
                 }
             }
             return count;
+            */
+
+            // O(n) solution
+            int switchCount = 0;
+            for (int i = 0; i < size; i++)
+            {
+                int currentState = bulb[i];
+                if (switchCount % 2 == 1)
+                {
+                    currentState = bulb[i] == 0 ? 1 : 0;
+                }
+                if (currentState == 0)
+                {
+                    switchCount++;
+                }
+            }
+            return switchCount;
         }
         public static void CountMinimumSwitches()
         {
