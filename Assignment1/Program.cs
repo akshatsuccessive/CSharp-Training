@@ -10,19 +10,19 @@ namespace Assignment1
     {
         static void Main(string[] args)
         {
-            //PerfectNumber.IsPerfectNumber();
+            PerfectNumber.IsPerfectNumber();
 
-            //MinimumGap.FindMinimumGap();
+            MinimumGap.FindMinimumGap();
 
-            //PairSum.FindPairs();
+            PairSum.FindPairs();
 
-            //MagicalString.IsMagicalString();
+            MagicalString.IsMagicalString();
 
-            //RemoveSpaces.RemoveMultipleSpaces();
+            RemoveSpaces.RemoveMultipleSpaces();
 
-            //ThirdLargest.FindThirdLargest();
+            ThirdLargest.FindThirdLargest();
 
-            //ProductArray.FindProductArray();
+            ProductArray.FindProductArray();
         }
     }
 }
