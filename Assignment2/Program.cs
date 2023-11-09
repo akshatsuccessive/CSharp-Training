@@ -20,26 +20,26 @@ namespace Assignment2
                 Console.WriteLine("4. Find out Maximum sum subarray");
                 Console.WriteLine("5. Exit");
 
-                int option = Convert.ToInt32(Console.ReadLine());
+                string option = Console.ReadLine();
                 switch (option)
                 {
-                    case 1:
+                    case "1":
                         BalancedIndex.FindBalancedIndex();
                         break;
 
-                    case 2:
+                    case "2":
                         Leaders.CountLeaders();
                         break;
 
-                    case 3:
+                    case "3":
                         MinimumSwitches.CountMinimumSwitches();
                         break;
 
-                    case 4:
+                    case "4":
                         MaximumSubarraySum.FindSum();
                         break;
 
-                    case 5:
+                    case "5":
                         endProcess = true;
                         Console.WriteLine("\nExit.....");
                         break;
