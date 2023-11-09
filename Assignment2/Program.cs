@@ -10,13 +10,46 @@ namespace Assignment2
     {
         static void Main(string[] args)
         {
-            //BalancedIndex.FindBalancedIndex();
+            bool endProcess = false;
+            do
+            {
+                Console.WriteLine("\nEnter a option :-");
+                Console.WriteLine("1. Find Balanced Index");
+                Console.WriteLine("2. Find Leaders in a Array");
+                Console.WriteLine("3. Lazy Person");
+                Console.WriteLine("4. Find out Maximum sum subarray");
+                Console.WriteLine("5. Exit");
 
-            //Leaders.CountLeaders();
+                int option = Convert.ToInt32(Console.ReadLine());
+                switch (option)
+                {
+                    case 1:
+                        BalancedIndex.FindBalancedIndex();
+                        break;
 
-            MinimumSwitches.CountMinimumSwitches();
+                    case 2:
+                        Leaders.CountLeaders();
+                        break;
 
-            //MaximumSubarraySum.FindSum();
+                    case 3:
+                        MinimumSwitches.CountMinimumSwitches();
+                        break;
+
+                    case 4:
+                        MaximumSubarraySum.FindSum();
+                        break;
+
+                    case 5:
+                        endProcess = true;
+                        Console.WriteLine("\nExit.....");
+                        break;
+
+                    default:
+                        Console.WriteLine("\nInvalid option, Please try again\n");
+                        break;
+                }
+            } while (!endProcess);
+            Console.ReadKey();
         }
     }
 }
