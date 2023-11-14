@@ -19,8 +19,17 @@ namespace OOPsTask
         public string Name { get; set; }
         public string Code { get; set; }
 
-        private List<CourseSubject> _subjects = new List<CourseSubject>();
-        public List<CourseSubject> Subjects
+        private static List<CourseSubject> _subjects = new List<CourseSubject>();
+        public Course()
+        {
+            CourseSubject newSubject = new CourseSubject();
+            newSubject.Id = "101";
+            newSubject.Name = "B.Tech";
+            newSubject.Code = "IT";
+            _subjects.Add(newSubject);
+        }
+
+        public static List<CourseSubject> Subjects
         {
             get
             {
@@ -48,14 +57,59 @@ namespace OOPsTask
         public string Name { get; set; }
         public string Code { get; set; }
 
-        public List<Course> Courses;
+        private static List<Course> _courses = new List<Course>();
+
+        public static List<Course> Courses
+        {
+            get
+            {
+                return _courses;
+            }
+        }
+
+        public Student()
+        {
+            Course newCourse = new Course();
+            newCourse.Id = "101";
+            newCourse.Name = "B.Tech";
+            newCourse.Code = "IT";
+            _courses.Add(newCourse);
+        }
+
+        public void AddCourse(Course course)
+        {
+            _courses.Add(course);
+        }
+        public void RemoveCourse(Course course)
+        {
+            _courses.Remove(course);
+        }
+        public void AddCourse(List<Course> courseList)
+        {
+            _courses.AddRange(courseList);
+        }
     }
     class Program
     {
+        private static void PrintStudent(List<Student> studentsList)
+        {
+            Console.WriteLine("\n\nAll Students : ");
+            foreach (var item in studentsList)
+            {
+                Console.WriteLine("{0}, {1}, {2}", item.Id, item.Name, item.Code);
+            }
+        }
+        private static void PrintCourses()
+        {
+            Console.WriteLine("\n\nAll Courses : ");
+            foreach (var item in Student.Courses)
+            {
+                Console.WriteLine("{0}, {1}, {2}", item.Id, item.Name, item.Code);
+            }
+        }
+
         static void Main(string[] args)
         {
-            List<CourseSubject> subjectsList = new List<CourseSubject>();
-            List<Course> coursesList = new List<Course>();
             List<Student> studentsList = new List<Student>();
 
             bool endProcess = false;
@@ -77,103 +131,117 @@ namespace OOPsTask
                 switch (option)
                 {
                     case "1":
-                        bool endProcessOfAdding = false;
-                        do
+                        if (Course.Subjects.Count == 0)
                         {
-                            Console.Write("\nEnter Subject Id : ");
-                            string subId = Console.ReadLine();
-                            Console.Write("Enter Subject Name : ");
-                            string subName = Console.ReadLine();
-                            Console.Write("Enter Subject Code : ");
-                            string subCode = Console.ReadLine();
+                            Console.WriteLine("No Subjects Added as of Now, Please add a Subjects");
+                        }
+                        else
+                        {
 
-                            CourseSubject newSubject = new CourseSubject();
-                            newSubject.Id = subId;
-                            newSubject.Name = subName;
-                            newSubject.Code = subCode;
-
-                            subjectsList.Add(newSubject);
-
-                            Console.WriteLine("\nSubject added successfully!");
-                            Console.WriteLine("\nDo you want to Add More Subjects (Y/N) : ");
-                            string AddOption = Console.ReadLine();
-
-                            switch (AddOption)
+                            bool endProcessOfAdding = false;
+                            do
                             {
-                                case "Y":
-                                    continue;
-                                case "y":
-                                    continue;
-                                case "N":
-                                    endProcessOfAdding = true;
-                                    break;
-                                case "n":
-                                    endProcessOfAdding = true;
-                                    break;
+                                PrintCourses();
+                                Console.WriteLine("Enter Course Name/Id to Add a Subject");
+                                string inputName = Console.ReadLine();
 
-                                default:
-                                    Console.WriteLine("\nInvalid option, Please try again\n");
-                                    break;
-                            }
+                                Course isCourse = Student.Courses.FirstOrDefault(
+                                c => c.Name.ToLower() == inputName.ToLower() || c.Id.ToLower() == inputName.ToLower());
 
-                        } while (!endProcessOfAdding);
+                                Console.Write("\nEnter Subject Id : ");
+                                string subId = Console.ReadLine();
+                                Console.Write("Enter Subject Name : ");
+                                string subName = Console.ReadLine();
+                                Console.Write("Enter Subject Code : ");
+                                string subCode = Console.ReadLine();
 
+                                CourseSubject newSubject = new CourseSubject();
+                                newSubject.Id = subId;
+                                newSubject.Name = subName;
+                                newSubject.Code = subCode;
+                                isCourse.AddSubjects(newSubject);
+
+                                Console.WriteLine("\nSubject added successfully!");
+                                Console.WriteLine("\nDo you want to Add More Subjects (Y/N) : ");
+                                string AddOption = Console.ReadLine();
+
+                                switch (AddOption)
+                                {
+                                    case "Y":
+                                        continue;
+                                    case "y":
+                                        continue;
+                                    case "N":
+                                        endProcessOfAdding = true;
+                                        break;
+                                    case "n":
+                                        endProcessOfAdding = true;
+                                        break;
+
+                                    default:
+                                        Console.WriteLine("\nInvalid option, Please try again\n");
+                                        break;
+                                }
+
+                            } while (!endProcessOfAdding);
+                        }
                         break;
 
 
                     case "2":
-                        bool endProcessOfCourse = false;
-                        do
+                        if (Student.Courses.Count == 0)
                         {
-                            Console.Write("\nEnter Course Id : ");
-                            string courseId = Console.ReadLine();
-                            Console.Write("Enter Course Name : ");
-                            string courseName = Console.ReadLine();
-                            Console.Write("Enter Course Code : ");
-                            string courseCode = Console.ReadLine();
-
-                            Course newCourse = new Course();
-                            newCourse.Id = courseId;
-                            newCourse.Name = courseName;
-                            newCourse.Code = courseCode;
-
-                            //CourseSubject defaultSubject = subjectsList.FirstOrDefault(s => s.Name == "English");
-                            //if (defaultSubject != null)
-                            //{
-                            //    newCourse.AddSubjects(defaultSubject);
-                            //}
-                            CourseSubject defaultSubject = new CourseSubject();
-                            defaultSubject.Id = "101";
-                            defaultSubject.Name = "English";
-                            defaultSubject.Code = "ENG";
-
-                            newCourse.AddSubjects(defaultSubject);
-
-                            coursesList.Add(newCourse);
-
-                            Console.WriteLine("\nCourse added successfully!");
-                            Console.WriteLine("\nDo you want to Add More Courses (Y/N) : ");
-                            string AddOption = Console.ReadLine();
-                            switch (AddOption)
+                            Console.WriteLine("No Courses Added as of Now, Please add a Course");
+                        }
+                        else
+                        {
+                            bool endProcessOfCourse = false;
+                            do
                             {
-                                case "Y":
-                                    continue;
-                                case "y":
-                                    continue;
-                                case "N":
-                                    endProcessOfCourse = true;
-                                    break;
-                                case "n":
-                                    endProcessOfCourse = true;
-                                    break;
+                                PrintStudent(studentsList);
+                                Console.WriteLine("Enter Student Name/Id to Add a Course");
+                                string inputName = Console.ReadLine();
 
-                                default:
-                                    Console.WriteLine("\nInvalid option, Please try again\n");
-                                    break;
-                            }
+                                Student isStudent = studentsList.FirstOrDefault(
+                                s => s.Name.ToLower() == inputName.ToLower() || s.Id.ToLower() == inputName.ToLower());
 
-                        } while (!endProcessOfCourse);
+                                Console.Write("\nEnter Course Id : ");
+                                string courseId = Console.ReadLine();
+                                Console.Write("Enter Course Name : ");
+                                string courseName = Console.ReadLine();
+                                Console.Write("Enter Course Code : ");
+                                string courseCode = Console.ReadLine();
 
+                                Course newCourse = new Course();
+                                newCourse.Id = courseId;
+                                newCourse.Name = courseName;
+                                newCourse.Code = courseCode;
+                                isStudent.AddCourse(newCourse);
+
+
+                                Console.WriteLine("\nCourse added successfully!");
+                                Console.WriteLine("\nDo you want to Add More Courses (Y/N) : ");
+                                string AddOption = Console.ReadLine();
+                                switch (AddOption)
+                                {
+                                    case "Y":
+                                        continue;
+                                    case "y":
+                                        continue;
+                                    case "N":
+                                        endProcessOfCourse = true;
+                                        break;
+                                    case "n":
+                                        endProcessOfCourse = true;
+                                        break;
+
+                                    default:
+                                        Console.WriteLine("\nInvalid option, Please try again\n");
+                                        break;
+                                }
+
+                            } while (!endProcessOfCourse);
+                        }
                         break;
 
 
@@ -188,18 +256,12 @@ namespace OOPsTask
                             Console.Write("Enter Student Code : ");
                             string stCode = Console.ReadLine();
 
-                            Course defaultCourse = new Course();
-                            defaultCourse.Id = "15";
-                            defaultCourse.Name = "B.Tech";
-                            defaultCourse.Code = "BT";
-
                             Student newStudent = new Student();
                             newStudent.Id = stId;
                             newStudent.Name = stName;
                             newStudent.Code = stCode;
 
                             studentsList.Add(newStudent);
-                            // newStudent.Courses.Add(defaultCourse);
 
                             Console.WriteLine("Student added successfully!");
                             Console.WriteLine("\nDo you want to Add More Students (Y/N) : ");
@@ -226,26 +288,49 @@ namespace OOPsTask
                         break;
 
                     case "4":
-                        Console.WriteLine("All Subjects : ");
-                        foreach (var item in subjectsList)
+                        if (Course.Subjects.Count == 0)
                         {
-                            Console.WriteLine("{0}, {1}, {2}", item.Id, item.Name, item.Code);
+                            Console.WriteLine("No Subjects Added\n");
+                        }
+                        else
+                        {
+                            Console.WriteLine("\n\nAll Subjects : ");
+                            foreach (var subject in Course.Subjects)
+                            {
+                                Console.WriteLine("{0}, {1}, {2}", subject.Id, subject.Name, subject.Code);
+                            }
+                            Console.WriteLine("");
                         }
                         break;
 
                     case "5":
-                        Console.WriteLine("All Courses : ");
-                        foreach (var item in coursesList)
+                        if (Student.Courses.Count == 0)
                         {
-                            Console.WriteLine("{0}, {1}, {2}", item.Id, item.Name, item.Code);
+                            Console.WriteLine("No Courses Added\n");
+                        }
+                        else
+                        {
+                            Console.WriteLine("\n\nAll Courses : ");
+                            foreach (var course in Student.Courses)
+                            {
+                                Console.WriteLine("{0}, {1}, {2}", course.Id, course.Name, course.Code);
+                            }
+                            Console.WriteLine("\n");
                         }
                         break;
 
                     case "6":
-                        Console.WriteLine("All Students : ");
-                        foreach (var item in studentsList)
+                        if (studentsList.Count == 0)
                         {
-                            Console.WriteLine("{0}, {1}, {2}", item.Id, item.Name, item.Code);
+                            Console.WriteLine("No Students Added\n");
+                        }
+                        else
+                        {
+                            Console.WriteLine("\nAll Students : ");
+                            foreach (var student in studentsList)
+                            {
+                                Console.WriteLine("{0}, {1}, {2}", student.Id, student.Name, student.Code);
+                            }
                         }
                         break;
 
@@ -253,16 +338,17 @@ namespace OOPsTask
                         Console.Write("Enter Subject Name or Code: ");
                         string inputSubject = Console.ReadLine().ToLower();
 
-                        CourseSubject foundSubject = subjectsList.FirstOrDefault(
+                        CourseSubject foundSubject = Course.Subjects.FirstOrDefault(
                             s => s.Name.ToLower() == inputSubject || s.Code.ToLower() == inputSubject);
 
                         if (foundSubject != null)
                         {
                             Console.WriteLine("Subject found: {0}, {1}, {2}", foundSubject.Id, foundSubject.Name, foundSubject.Code);
+                            Console.WriteLine("\n");
                         }
                         else
                         {
-                            Console.WriteLine("Subject not found.");
+                            Console.WriteLine("Subject not found.\n");
                         }
                         break;
 
@@ -270,21 +356,22 @@ namespace OOPsTask
                         Console.Write("Enter Course Name or Code: ");
                         string inputCourse = Console.ReadLine().ToLower();
 
-                        Course foundCourse = coursesList.FirstOrDefault(
+                        Course foundCourse = Student.Courses.FirstOrDefault(
                             c => c.Name.ToLower() == inputCourse || c.Code.ToLower() == inputCourse);
 
                         if (foundCourse != null)
                         {
                             Console.WriteLine("Course found: {0}, {1}, {2}", foundCourse.Id, foundCourse.Name, foundCourse.Code);
+                            Console.WriteLine("\n");
                         }
                         else
                         {
-                            Console.WriteLine("Course not found.");
+                            Console.WriteLine("Course not found.\n");
                         }
                         break;
 
                     case "9":
-                        Console.Write("Enter Course Name or Code: ");
+                        Console.Write("Enter Student Name or Code: ");
                         string inputStudent = Console.ReadLine().ToLower();
 
                         Student foundStudent = studentsList.FirstOrDefault(
@@ -292,11 +379,12 @@ namespace OOPsTask
 
                         if (foundStudent != null)
                         {
-                            Console.WriteLine("Course found: {0}, {1}, {2}", foundStudent.Id, foundStudent.Name, foundStudent.Code);
+                            Console.WriteLine("Student found: {0}, {1}, {2}", foundStudent.Id, foundStudent.Name, foundStudent.Code);
+                            Console.WriteLine("\n");
                         }
                         else
                         {
-                            Console.WriteLine("Course not found.");
+                            Console.WriteLine("Student not found.\n");
                         }
                         break;
 
