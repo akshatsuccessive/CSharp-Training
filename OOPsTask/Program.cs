@@ -6,89 +6,6 @@ using System.Threading.Tasks;
 
 namespace OOPsTask
 {
-    class CourseSubject
-    {
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public string Code { get; set; }
-    }
-
-    class Course
-    {
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public string Code { get; set; }
-
-        private static List<CourseSubject> _subjects = new List<CourseSubject>();
-        public Course()
-        {
-            CourseSubject newSubject = new CourseSubject();
-            newSubject.Id = "101";
-            newSubject.Name = "B.Tech";
-            newSubject.Code = "IT";
-            _subjects.Add(newSubject);
-        }
-
-        public static List<CourseSubject> Subjects
-        {
-            get
-            {
-                return _subjects;
-            }
-        }
-        public void AddSubjects(CourseSubject subject)
-        {
-            _subjects.Add(subject);
-        }
-        public void AddSubjects(List<CourseSubject> subjects)
-        {
-            _subjects.AddRange(subjects);
-        }
-
-        public void RemoveSubjects(CourseSubject subject)
-        {
-            _subjects.Remove(subject);
-        }
-    }
-
-    class Student
-    {
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public string Code { get; set; }
-
-        private static List<Course> _courses = new List<Course>();
-
-        public static List<Course> Courses
-        {
-            get
-            {
-                return _courses;
-            }
-        }
-
-        public Student()
-        {
-            Course newCourse = new Course();
-            newCourse.Id = "101";
-            newCourse.Name = "B.Tech";
-            newCourse.Code = "IT";
-            _courses.Add(newCourse);
-        }
-
-        public void AddCourse(Course course)
-        {
-            _courses.Add(course);
-        }
-        public void RemoveCourse(Course course)
-        {
-            _courses.Remove(course);
-        }
-        public void AddCourse(List<Course> courseList)
-        {
-            _courses.AddRange(courseList);
-        }
-    }
     class Program
     {
         private static void PrintStudent(List<Student> studentsList)
@@ -131,13 +48,12 @@ namespace OOPsTask
                 switch (option)
                 {
                     case "1":
-                        if (Course.Subjects.Count == 0)
+                        if (Student.Courses.Count == 1)
                         {
-                            Console.WriteLine("No Subjects Added as of Now, Please add a Subjects");
+                            Console.WriteLine("No Courses Added as of Now, Please add a Course first");
                         }
                         else
                         {
-
                             bool endProcessOfAdding = false;
                             do
                             {
@@ -159,9 +75,17 @@ namespace OOPsTask
                                 newSubject.Id = subId;
                                 newSubject.Name = subName;
                                 newSubject.Code = subCode;
-                                isCourse.AddSubjects(newSubject);
 
-                                Console.WriteLine("\nSubject added successfully!");
+                                if (isCourse != null)
+                                {
+                                    isCourse.AddSubjects(newSubject);
+                                    Console.WriteLine("\nSubject added successfully!");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Course is not exist\n");
+                                }
+
                                 Console.WriteLine("\nDo you want to Add More Subjects (Y/N) : ");
                                 string AddOption = Console.ReadLine();
 
@@ -189,9 +113,9 @@ namespace OOPsTask
 
 
                     case "2":
-                        if (Student.Courses.Count == 0)
+                        if (studentsList.Count == 0)
                         {
-                            Console.WriteLine("No Courses Added as of Now, Please add a Course");
+                            Console.WriteLine("No Student Added as of Now, Please add a Student first");
                         }
                         else
                         {
@@ -216,10 +140,18 @@ namespace OOPsTask
                                 newCourse.Id = courseId;
                                 newCourse.Name = courseName;
                                 newCourse.Code = courseCode;
-                                isStudent.AddCourse(newCourse);
+
+                                if (isStudent != null)
+                                {
+                                    isStudent.AddCourse(newCourse);
+                                    Console.WriteLine("\nCourse added successfully!");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Student is not exist\n");
+                                }
 
 
-                                Console.WriteLine("\nCourse added successfully!");
                                 Console.WriteLine("\nDo you want to Add More Courses (Y/N) : ");
                                 string AddOption = Console.ReadLine();
                                 switch (AddOption)
@@ -299,7 +231,7 @@ namespace OOPsTask
                             {
                                 Console.WriteLine("{0}, {1}, {2}", subject.Id, subject.Name, subject.Code);
                             }
-                            Console.WriteLine("");
+                            Console.WriteLine("\n");
                         }
                         break;
 
@@ -331,6 +263,7 @@ namespace OOPsTask
                             {
                                 Console.WriteLine("{0}, {1}, {2}", student.Id, student.Name, student.Code);
                             }
+                            Console.WriteLine("\n");
                         }
                         break;
 
