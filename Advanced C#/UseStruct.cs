@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CSharp_Advanced
+namespace Advanced_CSharp
 {
     public struct Books
     {
@@ -34,10 +34,9 @@ namespace CSharp_Advanced
             Console.WriteLine("Book Id : {0}, Title : {1}, Author : {2}, Subject : {3}", _bookId, _title, _author, _subject);
         }
     }
-
-    class Program
+    class UseStruct
     {
-        public static void Main(string[] args)
+        public static void Method()
         {
             Books b1 = new Books("My title", "Akshat", "Test Subject", 7);
             b1.PrintBooks();

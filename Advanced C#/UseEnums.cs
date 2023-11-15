@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CSharp_Advanced
+namespace Advanced_CSharp
 {
     class Logging
     {
@@ -38,9 +38,9 @@ namespace CSharp_Advanced
             }
         }
     }
-    class Program
+    class UseEnums
     {
-        public static void Main(string[] args)
+        public static void Method()
         {
             // under lying value    
 

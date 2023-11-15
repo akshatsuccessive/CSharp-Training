@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CSharp_Advanced
+namespace Advanced_CSharp
 {
-    class Demo
+    class DemoReadOnly
     {
         public readonly string val = "Only changed in Constructor";
         public readonly string val1;
         public readonly string val2 = "Value 2";
 
-        public Demo()
+        public DemoReadOnly()
         {
             val = "Changed";
             val1 = "Changed in constructor";
@@ -24,17 +24,16 @@ namespace CSharp_Advanced
         //}
 
     }
-    class Program
+    class UseReadOnly
     {
-        static void Main(string[] args)
+        public static void Method()
         {
-            Demo obj = new Demo();
+            DemoReadOnly obj = new DemoReadOnly();
             Console.WriteLine(obj.val);
             Console.WriteLine(obj.val1);
             Console.WriteLine(obj.val2);
 
             //Console.WriteLine(Demo.val);
-            Console.ReadKey();
         }
     }
 }
