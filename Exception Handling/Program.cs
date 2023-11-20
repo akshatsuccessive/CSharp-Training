@@ -13,8 +13,12 @@ namespace Exception_Handling
             //TryCatch.Method();
             //DivideByZero.Method();
             //MultipleCatch.Method();
-            CustomException.Method();
-
+            //CustomException.Method();
+            //Finally.Method();
+            //CustomException2.Method();
+            //CustomException3.Method();
+            //NullReference.Method();
+            ArgumentOutOfRange.Method();
             Console.ReadKey();
         }
     }
