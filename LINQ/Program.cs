@@ -28,52 +28,49 @@ namespace LINQ
                 Console.WriteLine("6. Last / LastOrDefault");
                 Console.WriteLine("7. Single / SingleOrDefault");
                 Console.WriteLine("8. OrderBy and ThenBy");
-                Console.WriteLine("9. Exit");
+                Console.WriteLine("9. Max, Min, Count, Average and Sum");
+                Console.WriteLine("10. Exit");
 
                 string option = Console.ReadLine();
                 switch (option)
                 {
                     case "1":
-                        Console.WriteLine("\n");
                         Distinct.Method();
                         break;
 
                     case "2":
-                        Console.WriteLine("\n");
                         Select.Method();
                         break;
 
                     case "3":
-                        Console.WriteLine("\n");
                         Where.Method();
                         break;
 
                     case "4":
-                        Console.WriteLine("\n");
                         SkipTake.Method();
                         break;
 
                     case "5":
-                        Console.WriteLine("\n");
                         UseFirst.Method();
                         break;
 
                     case "6":
-                        Console.WriteLine("\n");
                         UseLast.Method();
                         break;
 
                     case "7":
-                        Console.WriteLine("\n");
                         UseSingle.Method();
                         break;
 
                     case "8":
-                        Console.WriteLine("\n");
                         OrderByThenBy.Method();
                         break;
 
                     case "9":
+                        Aggregate.Method();
+                        break;
+
+                    case "10":
                         endProcess = true;
                         Console.WriteLine("\n\nEXIT.......");
                         break;
