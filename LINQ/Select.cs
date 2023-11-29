@@ -18,11 +18,18 @@ namespace LINQ
                 new Student() { StudentID = 5, StudentName = "Steve" , Age = 15 }
             };
 
-            var result = studentList.Select(s => new { Name = "Mr. " + s.StudentName, Age = s.Age });
-
-            foreach(var item in result)
+            var resultAge = studentList.Select(s => new { Age = s.Age, Salary = 25000 });
+            foreach (var item in resultAge)
             {
-                Console.WriteLine(item.Name + ", " + item.Age);
+                Console.WriteLine("Age : {0} and Salary : {1}", item.Age, item.Salary);
+            }
+
+            Console.WriteLine("\n");
+
+            var teenAgers = studentList.Where(s => s.Age >= 13 && s.Age <= 19).Select(s => s.Age);
+            foreach (int item in teenAgers)
+            {
+                Console.WriteLine(item);
             }
         }
     }
