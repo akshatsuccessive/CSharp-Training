@@ -31,7 +31,12 @@ namespace LINQ
             //Select.Method();
             //Except.Method();
             //Intersect.Method();
-            Union.Method();
+            //Union.Method();
+            //ElementAt.Method();
+            //Deffered.Method();
+            //Immediate.Method();
+            //Groupby.Method();
+            ToLookUp.Method();
 
             Console.ReadKey();
         }
